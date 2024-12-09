@@ -2,7 +2,11 @@
 
 import { useState, useEffect } from "react";
 import Banner from "components/common/banner";
-import { getCurrentUser, openCameraWebSocket, addHistoryHandSign } from "api/api";
+import {
+  getCurrentUser,
+  openCameraWebSocket,
+  addHistoryHandSign,
+} from "api/api";
 import React from "react";
 
 export default function Page1() {
@@ -80,8 +84,10 @@ export default function Page1() {
         ...prevResults,
         {
           characters: detectedCharacters,
-          images: detectedCharacters.split('').map(char => characterImages[char] || "/images/placeholder.jpg")
-        }
+          images: detectedCharacters
+            .split("")
+            .map((char) => characterImages[char] || "/images/placeholder.jpg"),
+        },
       ]);
       setDetectedCharacters(""); // Clear detected characters after saving to history
       setShowButtons(false); // Hide buttons after saving
@@ -116,7 +122,10 @@ export default function Page1() {
   const handleDelete = (index) => {
     setHistoryResults((prevResults) => {
       const updatedResults = prevResults.filter((_, i) => i !== index);
-      console.log("Result deleted from history, updated historyResults:", updatedResults);
+      console.log(
+        "Result deleted from history, updated historyResults:",
+        updatedResults
+      );
       return updatedResults;
     });
   };
@@ -140,8 +149,10 @@ export default function Page1() {
         ...prevResults,
         {
           characters,
-          images: characters.split('').map(char => characterImages[char] || "/images/placeholder.jpg")
-        }
+          images: characters
+            .split("")
+            .map((char) => characterImages[char] || "/images/placeholder.jpg"),
+        },
       ]);
     } catch (err) {
       console.error("Error saving detected characters:", err);

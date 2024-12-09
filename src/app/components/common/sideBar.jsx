@@ -142,6 +142,29 @@ export default function SideBar({ isVisible, toggleSidebar }) {
             <span>Hand Sign</span>
           </a>
           <a
+            href="/text_to_sign"
+            className={tabId === "/text_to_sign" && "selected_item_sidebar"}
+          >
+            <div className="min-w-6">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 20 20"
+                fill="none"
+              >
+                <path
+                  d="M2 10H18M10 2V10M10 10V18"
+                  stroke={tabId === "/text_to_sign" ? "red" : "#4A5568"}
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </div>
+            <span>Text to Sign</span>
+          </a>
+          <a
             href="/history"
             className={tabId === "/history" && "selected_item_sidebar"}
           >
@@ -155,7 +178,7 @@ export default function SideBar({ isVisible, toggleSidebar }) {
               >
                 <path
                   d="M1 3H13M7 1V3M8.0482 12.5C6.52083 10.9178 5.28073 9.0565 4.41187 7M10.5 16H17.5M9 19L14 9L19 19M10.7511 3C9.7831 8.7702 6.06969 13.6095 1 16.129"
-                  stroke={tabId === "/translation" ? "red" : "#4A5568"}
+                  stroke={tabId === "/history" ? "red" : "#4A5568"}
                   strokeWidth="2"
                   strokeLinecap="round"
                   strokeLinejoin="round"
