@@ -143,3 +143,46 @@ export const deleteHistoryHandSign = async (handSignText, token) => {
     throw error;
   }
 };
+
+export const voiceToSign = async (targetLanguage, duration) => {
+  try {
+    const response = await axios.post(`${API_URL}/voice-to-sign`, {
+      target_language: targetLanguage,
+      duration: duration,
+    }, {
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error during voice to sign translation:", error.response?.data?.detail || error.message);
+    throw error;
+  }
+};
+
+export const uploadVoiceFile = async (file, targetLanguage) => {
+  try {
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("target_language", targetLanguage);
+
+    for (let pair of formData.entries()) {
+      console.log(pair[0] + ", " + pair[1]); // Log keys and values in FormData
+    }
+
+    console.log("Uploading voice file...:", formData);
+
+    const response = await axios.post(`${API_URL}/upload`, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+
+
+    return response.data;
+  } catch (error) {
+    console.error("Error uploading voice file:", error.response?.data?.detail || error.message);
+    throw error;
+  }
+};

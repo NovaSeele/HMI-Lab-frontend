@@ -165,6 +165,26 @@ export default function SideBar({ isVisible, toggleSidebar }) {
             <span>Text to Sign</span>
           </a>
           <a
+            href="/voice_to_sign"
+            className={tabId === "/voice_to_sign" && "selected_item_sidebar"}
+          >
+            <div className="min-w-6">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 20 20"
+                fill="none"
+              >
+                <path
+                  d="M10 2C6.47715 2 3 5.47715 3 10s3.47715 8 8 8 8-3.47715 8-8S13.5228 2 10 2zm0 16a8 8 0 100-16 8 8 0 000 16zm0-14a6 6 0 100 12 6 6 0 000-12zm0 12a2 2 0 100-4 2 2 0 000 4zm0-6a4 4 0 100 8 4 4 0 000-8z"
+                  fill={tabId === "/voice_to_sign" ? "red" : "#4A5568"}
+                />
+              </svg>
+            </div>
+            <span>Voice to Sign</span>
+          </a>
+          <a
             href="/history"
             className={tabId === "/history" && "selected_item_sidebar"}
           >

@@ -2,10 +2,8 @@
 
 import { useState, useEffect } from "react";
 import Banner from "components/common/banner";
-import {
-  getCurrentUser,
-  addHistoryHandSign,
-} from "api/api";
+import Recorder from "components/common/recorder";
+import { getCurrentUser, addHistoryHandSign } from "api/api";
 import React from "react";
 
 export default function Page1() {
@@ -20,6 +18,8 @@ export default function Page1() {
   const [saveMessage, setSaveMessage] = useState(""); // Track save status message
   const [isLoading, setIsLoading] = useState(true); // Track loading state for fetching user
   const [inputText, setInputText] = useState(""); // New state for input text
+
+  const [transcription, setTranscription] = useState("");
 
   const characterImages = {
     A: "/HMI_Lab/img-1.png",
@@ -126,11 +126,10 @@ export default function Page1() {
     setInputText(e.target.value); // Update input text state
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault(); // Prevent default form submission
-    setDetectedCharacters(inputText.toUpperCase()); // Convert input to uppercase
-    setShowButtons(true); // Show buttons after input submission
-    setInputText(""); // Clear input field
+  const handleTranscriptionUpdate = (transcript) => {
+    setTranscription(transcript);
+    setDetectedCharacters(transcript.toUpperCase());
+    setShowButtons(true);
   };
 
   return (
@@ -138,33 +137,17 @@ export default function Page1() {
       <Banner label="Hand Sign">
         <img src="/images/translation_banner.png" alt="" />
       </Banner>
-      <form onSubmit={handleSubmit} className="mt-4">
-        <input
-          type="text"
-          value={inputText}
-          onChange={handleInputChange}
-          placeholder="Enter text"
-          className="border p-2 rounded"
-        />
-        <button
-          type="submit"
-          className="ml-2 p-2 bg-blue-500 text-white rounded"
-        >
-          Submit
-        </button>
-      </form>
-
-      {/* <div className="flex flex-wrap mt-2">
-        {detectedCharacters.split("").map((char, index) => (
-          <div key={index} className="inline-block mr-2 mb-2">
-            <img
-              src={characterImages[char] || "/images/placeholder.jpg"}
-              alt={char}
-              className="inline-block"
-            />
-          </div>
-        ))}
-      </div> */}
+      <div className="mt-4">
+        <div className="mt-4 flex justify-start">
+          <Recorder setTranscription={handleTranscriptionUpdate} />
+          {transcription && (
+            <div className="mt-6 w-full max-w-md text-center">
+              <h2 className="text-xl font-semibold">Transcription</h2>
+              <p className="bg-white p-4 rounded-lg shadow-lg">{transcription}</p>
+            </div>
+          )}
+        </div>
+      </div>
 
       <div className="mt-4 border border-gray-300 p-4 rounded">
         <div className="mt-4">
